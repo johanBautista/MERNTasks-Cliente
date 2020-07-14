@@ -8,7 +8,7 @@ const Barra = () => {
       </p>
       <nav className="nav-principal">
         <button className="btn btn-blank cerrar-sesion">Cerrar Sesión</button>
-      </nav>{' '}
+      </nav>
     </header>
   );
 };
