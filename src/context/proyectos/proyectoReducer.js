@@ -1,4 +1,5 @@
-import { FORMULARIO_PROYECTO } from '../../types';
+import { FORMULARIO_PROYECTO, OBTENER_PROYECTOS } from '../../types';
+// import Proyectos from '../../components/proyectos/Proyectos';
 
 export default (state, action) => {
   switch (action.type) {
@@ -6,6 +7,12 @@ export default (state, action) => {
       return {
         ...state,
         formulario: true,
+      };
+
+    case OBTENER_PROYECTOS:
+      return {
+        ...state,
+        proyectos: action.payload,
       };
     default:
       return state;
