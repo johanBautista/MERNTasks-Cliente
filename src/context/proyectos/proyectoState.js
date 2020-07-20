@@ -1,8 +1,13 @@
 import React, { useReducer } from 'react';
+import uuid, { v4 as uuidv4 } from 'uuid';
 
 import proyectoContext from './proyectoContext';
 import proyectoReducer from './proyectoReducer';
-import { FORMULARIO_PROYECTO, OBTENER_PROYECTOS } from '../../types';
+import {
+  FORMULARIO_PROYECTO,
+  OBTENER_PROYECTOS,
+  AGREGAR_PROYECTO,
+} from '../../types';
 
 const ProyectoState = (props) => {
   //arreglo simula DB
@@ -33,6 +38,16 @@ const ProyectoState = (props) => {
       payload: proyectos,
     });
   };
+
+  // agregar nuevo proyecto
+  const agregarProyecto = (proyecto) => {
+    proyecto.id = uuidv4();
+
+    dispatch({
+      type: AGREGAR_PROYECTO,
+      payload: proyecto,
+    });
+  };
   return (
     <proyectoContext.Provider
       value={{
@@ -40,6 +55,7 @@ const ProyectoState = (props) => {
         formulario: state.formulario,
         mostrarFormulario,
         obtenerProyectos,
+        agregarProyecto,
       }}
     >
       {props.children}
