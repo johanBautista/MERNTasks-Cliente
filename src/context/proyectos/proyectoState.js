@@ -7,6 +7,7 @@ import {
   FORMULARIO_PROYECTO,
   OBTENER_PROYECTOS,
   AGREGAR_PROYECTO,
+  VALIDAR_FORMULARIO,
 } from '../../types';
 
 const ProyectoState = (props) => {
@@ -20,6 +21,7 @@ const ProyectoState = (props) => {
   const initialState = {
     proyectos: [],
     formulario: false,
+    errorformulario: false,
   };
 
   //
@@ -48,14 +50,23 @@ const ProyectoState = (props) => {
       payload: proyecto,
     });
   };
+
+  //mostrar errores
+  const mostrarError = () => {
+    dispatch({
+      type: VALIDAR_FORMULARIO,
+    });
+  };
   return (
     <proyectoContext.Provider
       value={{
         proyectos: state.proyectos,
         formulario: state.formulario,
+        errorformulario: state.errorformulario,
         mostrarFormulario,
         obtenerProyectos,
         agregarProyecto,
+        mostrarError,
       }}
     >
       {props.children}
