@@ -1,7 +1,11 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import proyectoContext from '../../context/proyectos/proyectoContext';
 
 const FormTarea = () => {
+  // state del formulario
+  const proyectosContext = useContext(proyectoContext);
+  const { proyecto } = proyectosContext;
+
   //
   const [tarea, guardarTarea] = useState({
     nombre: '',
@@ -9,6 +13,9 @@ const FormTarea = () => {
 
   //
   const { nombre } = tarea;
+  //
+  if (!proyecto) return null;
+  const [proyectoActual] = proyecto;
 
   //
   const handleChange = (e) => {

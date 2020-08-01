@@ -1,7 +1,15 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import Tarea from './Tarea';
+import proyectoContext from '../../context/proyectos/proyectoContext';
 
 const ListadoTareas = () => {
+  // state del formulario
+  const proyectosContext = useContext(proyectoContext);
+  const { proyecto } = proyectosContext;
+
+  if (!proyecto) return <h2>Selecciona un Proyecto</h2>;
+  const [proyectoActual] = proyecto;
+  
   const tareasProyecto = [
     { nombre: 'tarea1', estado: true },
     { nombre: 'tarea2', estado: false },
@@ -9,9 +17,11 @@ const ListadoTareas = () => {
     { nombre: 'tarea4', estado: false },
   ];
 
+ 
+
   return (
     <Fragment>
-      <h2>desde listado tareas</h2>
+      <h2>Proyecto: {proyectoActual.nombre}</h2>
 
       <ul className="listado-tareas">
         {tareasProyecto.length === 0 ? (
@@ -23,7 +33,7 @@ const ListadoTareas = () => {
         )}
       </ul>
       <button
-      type="button"
+        type="button"
         className="btn btn-eliminar"
         // onClick={onClickEliminar}
       >
