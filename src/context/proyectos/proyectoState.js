@@ -9,6 +9,7 @@ import {
   AGREGAR_PROYECTO,
   VALIDAR_FORMULARIO,
   PROYECTO_ACTUAL,
+  ELIMINAR_PROYECTO,
 } from '../../types';
 
 const ProyectoState = (props) => {
@@ -19,6 +20,7 @@ const ProyectoState = (props) => {
     { id: 3, nombre: 'proyecto3' },
     { id: 4, nombre: 'proyecto4' },
   ];
+  //state inicial
   const initialState = {
     proyectos: [],
     formulario: false,
@@ -60,12 +62,23 @@ const ProyectoState = (props) => {
     });
   };
 
+  //mostrar proyecto acttual
   const ProyectoActual = (proyectoId) => {
     dispatch({
       type: PROYECTO_ACTUAL,
       payload: proyectoId,
     });
   };
+
+  //eliminar proyecto
+  const eliminarProyecto = (proyectoId) => {
+    dispatch({
+      type: ELIMINAR_PROYECTO,
+      payload: proyectoId,
+    });
+  };
+
+  //
   return (
     <proyectoContext.Provider
       value={{
@@ -78,6 +91,7 @@ const ProyectoState = (props) => {
         agregarProyecto,
         mostrarError,
         ProyectoActual,
+        eliminarProyecto,
       }}
     >
       {props.children}
