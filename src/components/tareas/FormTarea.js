@@ -1,20 +1,26 @@
 import React, { useState, useContext } from 'react';
 import proyectoContext from '../../context/proyectos/proyectoContext';
+import tareaContext from '../../context/tareas/tareaContext';
 
 const FormTarea = () => {
-  // state del formulario
+  // state-context del formulario
   const proyectosContext = useContext(proyectoContext);
   const { proyecto } = proyectosContext;
+
+  //obtener tareas context
+  const tareasContext = useContext(tareaContext);
+  const { agregarTarea } = tareasContext;
 
   //
   const [tarea, guardarTarea] = useState({
     nombre: '',
   });
 
-  //
+  //destructuring tarea
   const { nombre } = tarea;
-  //
+  //condicional si no hay proyecto
   if (!proyecto) return null;
+  //array destructuring extrer proyecto
   const [proyectoActual] = proyecto;
 
   //
@@ -28,6 +34,11 @@ const FormTarea = () => {
   //
   const onSubmit = (e) => {
     e.preventDefault();
+    //validaciones
+    //añadir la tarea
+    tarea.proyectoId = proyectoActual.id;
+    tarea.estado = false;
+    agregarTarea(tarea);
   };
 
   return (

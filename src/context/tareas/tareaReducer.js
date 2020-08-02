@@ -1,4 +1,4 @@
-import { TAREAS_PROYECTO } from '../../types';
+import { TAREAS_PROYECTO, AGREGAR_TAREA } from '../../types';
 
 export default (state, action) => {
   switch (action.type) {
@@ -10,6 +10,11 @@ export default (state, action) => {
         ),
       };
 
+    case AGREGAR_TAREA:
+      return {
+        ...state,
+        tareas: [...state.tareas, action.payload],
+      };
     default:
       return state;
   }
