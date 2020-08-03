@@ -1,48 +1,64 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import tareaContext from '../../context/tareas/tareaContext';
+import proyectoContext from '../../context/proyectos/proyectoContext';
 
-const Tarea = ({tarea}) => {
+const Tarea = ({ tarea }) => {
+  //obtener tareas context
+  const tareasContext = useContext(tareaContext);
+  const { eliminarTarea, obtenerTareas } = tareasContext;
+  //
+  const proyectosContext = useContext(proyectoContext);
+  const { proyecto } = proyectosContext;
+
+  const [proyectoActual] = proyecto;
+  //
+  const tareaEliminar = (id) => {
+    eliminarTarea(id);
+    obtenerTareas(proyectoActual.id);
+  };
+
   return (
     <li className="tarea sombra">
-    <p>{tarea.nombre} </p>
+      <p>{tarea.nombre} </p>
 
-    <div className="estado">
-      {tarea.estado ? (
+      <div className="estado">
+        {tarea.estado ? (
+          <button
+            type="button"
+            className="completo"
+            // onClick={() => cambiarEstado(tarea)}
+          >
+            Completo
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="incompleto"
+            // onClick={() => cambiarEstado(tarea)}
+          >
+            Incompleto
+          </button>
+        )}
+      </div>
+
+      <div className="acciones">
         <button
           type="button"
-          className="completo"
-          // onClick={() => cambiarEstado(tarea)}
+          className="btn btn-primario"
+          // onClick={() => seleccionarTarea(tarea)}
         >
-          Completo
+          Editar
         </button>
-      ) : (
+
         <button
           type="button"
-          className="incompleto"
-          // onClick={() => cambiarEstado(tarea)}
+          className="btn btn-secundario"
+          onClick={() => tareaEliminar(tarea.id)}
         >
-          Incompleto
+          Eliminar
         </button>
-      )}
-    </div>
-
-    <div className="acciones">
-      <button
-        type="button"
-        className="btn btn-primario"
-        // onClick={() => seleccionarTarea(tarea)}
-      >
-        Editar
-      </button>
-
-      <button
-        type="button"
-        className="btn btn-secundario"
-        // onClick={() => tareaEliminar(tarea._id)}
-      >
-        Eliminar
-      </button>
-    </div>
-  </li>
+      </div>
+    </li>
   );
 };
 
