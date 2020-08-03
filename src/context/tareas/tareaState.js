@@ -7,6 +7,8 @@ import {
   AGREGAR_TAREA,
   VALIDAR_TAREA,
   ELIMINAR_TAREA,
+  EDITAR_TAREA,
+  ESTADO_TAREA,
 } from '../../types';
 
 const TareaState = (props) => {
@@ -60,6 +62,22 @@ const TareaState = (props) => {
     });
   };
 
+  //editar tarea
+  const editarTarea = (id) => {
+    dispatch({
+      type: EDITAR_TAREA,
+      payload: id,
+    });
+  };
+
+  //cambio estado tarea
+  const cambiarEstadoTarea = (tarea) => {
+    dispatch({
+      type: ESTADO_TAREA,
+      payload: tarea,
+    });
+  };
+
   return (
     <TareaContext.Provider
       value={{
@@ -70,6 +88,8 @@ const TareaState = (props) => {
         agregarTarea,
         validarTarea,
         eliminarTarea,
+        editarTarea,
+        cambiarEstadoTarea,
       }}
     >
       {props.children}
