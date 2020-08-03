@@ -11,8 +11,8 @@ const Tarea = ({ tarea }) => {
   const {
     eliminarTarea,
     obtenerTareas,
-    editarTarea,
     cambiarEstadoTarea,
+    guardarTareaActual,
   } = tareasContext;
 
   const [proyectoActual] = proyecto;
@@ -23,8 +23,10 @@ const Tarea = ({ tarea }) => {
     obtenerTareas(proyectoActual.id);
   };
 
-  //
-  const seleccionarTarea = () => {};
+  // agregar tarea para editar
+  const seleccionarTarea = (tarea) => {
+    guardarTareaActual(tarea);
+  };
 
   //modificar estado tarea
   const cambiarEstado = (tarea) => {
