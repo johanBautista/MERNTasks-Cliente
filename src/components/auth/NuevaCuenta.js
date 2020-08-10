@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-
 const NuevaCuenta = () => {
   const [usuario, guardarUsuario] = useState({
     nombre: '',
@@ -24,6 +23,8 @@ const NuevaCuenta = () => {
   //
   const onSubmit = (e) => {
     e.preventDefault();
+    //validaciones
+    
   };
   return (
     <div className="form-usuario">
