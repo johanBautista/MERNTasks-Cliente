@@ -23,6 +23,7 @@ const AlertaState = (props) => {
         categoria,
       },
     });
+    //despues de 5seg limpiar la alerta
     setTimeout(() => {
       dispatch({
         type: OCULTAR_ALERTA,
