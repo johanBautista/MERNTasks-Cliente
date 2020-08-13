@@ -1,9 +1,9 @@
 import React, { useReducer } from 'react';
 // import uuid, { v4 as uuidv4 } from 'uuid';
-import clienteAxios from '../../config/axios.js';
 import AuthContext from './authContext';
 import AuthReducer from './authReducer';
 import tokenAuth from '../../config/token';
+import clienteAxios from '../../config/axios';
 
 import {
   REGISTRO_EXITOSO,
@@ -32,7 +32,7 @@ const AuthState = (props) => {
   const registrarUsuario = async (datos) => {
     try {
       const respuesta = await clienteAxios.post('/api/usuarios', datos);
-      // console.log(respuesta.data);
+      console.log(respuesta.data);
       dispatch({
         type: REGISTRO_EXITOSO,
         payload: respuesta.data,
@@ -114,8 +114,8 @@ const AuthState = (props) => {
         mensaje: state.mensaje,
         cargando: state.cargando,
         registrarUsuario,
-        usuarioAutenticado,
         iniciarSesion,
+        usuarioAutenticado,
         cerrarSesion,
       }}
     >
