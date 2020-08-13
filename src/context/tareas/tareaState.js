@@ -2,7 +2,8 @@ import React, { useReducer } from 'react';
 
 import TareaContext from './tareaContext';
 import TareaReducer from './tareaReducer';
-import uuid, { v4 as uuidv4 } from 'uuid';
+// import uuid, { v4 as uuidv4 } from 'uuid';
+import clienteAxios from '../../config/axios';
 
 import {
   TAREAS_PROYECTO,
@@ -17,16 +18,16 @@ import {
 
 const TareaState = (props) => {
   const initialstate = {
-    tareas: [
-      { id: 1, nombre: 'tarea1', estado: true, proyectoId: 1 },
-      { id: 2, nombre: 'tarea2', estado: false, proyectoId: 2 },
-      { id: 3, nombre: 'tarea3', estado: true, proyectoId: 3 },
-      { id: 4, nombre: 'tarea4', estado: false, proyectoId: 4 },
-      { id: 5, nombre: 'tarea11', estado: true, proyectoId: 1 },
-      { id: 6, nombre: 'tarea22', estado: false, proyectoId: 2 },
-      { id: 7, nombre: 'tarea33', estado: true, proyectoId: 3 },
-    ],
-    tareasproyecto: null,
+    // tareas: [
+    //   { id: 1, nombre: 'tarea1', estado: true, proyectoId: 1 },
+    //   { id: 2, nombre: 'tarea2', estado: false, proyectoId: 2 },
+    //   { id: 3, nombre: 'tarea3', estado: true, proyectoId: 3 },
+    //   { id: 4, nombre: 'tarea4', estado: false, proyectoId: 4 },
+    //   { id: 5, nombre: 'tarea11', estado: true, proyectoId: 1 },
+    //   { id: 6, nombre: 'tarea22', estado: false, proyectoId: 2 },
+    //   { id: 7, nombre: 'tarea33', estado: true, proyectoId: 3 },
+    // ],
+    tareasproyecto: [],
     errortarea: false,
     tareaseleccionada: null,
   };
@@ -45,13 +46,15 @@ const TareaState = (props) => {
   };
 
   // agregar tarea
-  const agregarTarea = (tarea) => {
-    tarea.id = uuidv4();
+  const agregarTarea = async (tarea) => {
+    // tarea.id = uuidv4();
 
-    dispatch({
-      type: AGREGAR_TAREA,
-      payload: tarea,
-    });
+    try {
+      const resultado = await clienteAxios.post('/api/tareas', tarea);
+      console.log(resultado);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   //valida y muestra error
@@ -103,7 +106,7 @@ const TareaState = (props) => {
   return (
     <TareaContext.Provider
       value={{
-        tareas: state.tareas,
+        // tareas: state.tareas,
         tareasproyecto: state.tareasproyecto,
         errortarea: state.errortarea,
         tareaseleccionada: state.tareaseleccionada,
